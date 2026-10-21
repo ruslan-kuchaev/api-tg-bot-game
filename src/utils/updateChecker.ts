@@ -1,5 +1,5 @@
-import { getGamesConfig } from './configLoader';
-import { NewsItem, NewsResponse } from './steamApi';
+import { getGamesConfig } from './configLoader.ts';
+import { NewsItem, NewsResponse } from './steamApi.ts';
 
 export async function checkGameUpdates(): Promise<Array<{
     game: string;

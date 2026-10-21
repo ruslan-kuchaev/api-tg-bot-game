@@ -1,5 +1,5 @@
 
-export { getGamesConfig } from './configLoader';
-export { checkGameUpdates } from './updateChecker';
-export { formatUpdateMessage } from './messageFormatter';
-export { NewsItem, NewsResponse } from './steamApi';
+export { getGamesConfig } from './configLoader.ts';
+export { checkGameUpdates } from './updateChecker.ts';
+export { formatUpdateMessage } from './messageFormatter.ts';
+export type { NewsItem, NewsResponse } from './steamApi.ts';

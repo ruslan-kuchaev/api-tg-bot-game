@@ -1,6 +1,7 @@
 node_modules/
 dist/
 .env
+.env.monitor
 *.log
 .DS_Store
 # games.json

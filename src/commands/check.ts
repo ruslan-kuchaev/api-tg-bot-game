@@ -1,5 +1,5 @@
-import { MyContext } from "../types";
-import { checkGameUpdates, formatUpdateMessage } from "../utils";
+import { MyContext } from "../types.ts";
+import { checkGameUpdates, formatUpdateMessage } from "../utils/index.ts";
 
 export async function checkUpdates(ctx: MyContext) {
     try {

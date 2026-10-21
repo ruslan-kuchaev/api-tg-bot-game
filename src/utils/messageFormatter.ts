@@ -1,4 +1,4 @@
-import { checkGameUpdates } from './updateChecker';
+import { checkGameUpdates } from './updateChecker.ts';
 
 export function formatUpdateMessage(updates: ReturnType<typeof checkGameUpdates> extends Promise<infer T> ? T : never): string {
     const configError = updates.find(update => update.errorConfig);

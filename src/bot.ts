@@ -1,12 +1,12 @@
 import { Bot, GrammyError, HttpError, session } from "grammy";
-import { config } from "dotenv";
-import { MyContext, SessionData } from "./types";
-import { menuCommands } from "./menu/botmenu";
-import { botStart, checkUpdates, listGames } from "./commands";
+import { load } from "dotenv";
+import { MyContext, SessionData } from "./types.ts";
+import { menuCommands } from "./menu/botmenu.ts";
+import { botStart, checkUpdates, listGames } from "./commands/index.ts";
 
-config();
+await load({ export: true });
 
-const bot = new Bot<MyContext>(process.env.API_KEY!);
+const bot = new Bot<MyContext>(Deno.env.get("API_KEY")!);
 
 bot.use(
     session({

@@ -1,0 +1,47 @@
+services:
+  # MariaDB для SteamMonitor
+  mysql:
+    image: mariadb:11.5
+    container_name: steammonitor-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-change_this_root_password}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-steammonitor}
+      MYSQL_USER: ${MYSQL_USER:-steammonitor}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-change_this_password}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/SteamMonitor/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    networks:
+      - steammonitor-network
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  # SteamMonitor Application
+  monitor:
+    build:
+      context: ./docker/SteamMonitor
+      dockerfile: Dockerfile
+    container_name: steammonitor-app
+    restart: unless-stopped
+    environment:
+      DB_CONNECTION_STRING: ${DB_CONNECTION_STRING:-Server=mysql;Port=3306;Database=steammonitor;User ID=steammonitor;Password=change_this_password;}
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - steammonitor-network
+
+volumes:
+  mysql_data:
+    name: steammonitor-mysql-data
+
+networks:
+  steammonitor-network:
+    name: steammonitor-network
+    driver: bridge
+  

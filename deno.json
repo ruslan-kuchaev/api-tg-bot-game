@@ -1,0 +1,33 @@
+{
+  "tasks": {
+    "dev": "deno run --allow-net --allow-read --allow-env --watch src/bot.ts",
+    "start": "deno run --allow-net --allow-read --allow-env src/bot.ts"
+  },
+  "imports": {
+    "grammy": "npm:grammy@^1.38.4",
+    "@grammyjs/conversations": "npm:@grammyjs/conversations@^1.2.0",
+    "@neondatabase/serverless": "npm:@neondatabase/serverless@^0.10.1",
+    "dotenv": "https://deno.land/std@0.224.0/dotenv/mod.ts"
+  },
+  "compilerOptions": {
+    "strict": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "lib": ["deno.window"]
+  },
+  "nodeModulesDir": "none",
+  "fmt": {
+    "useTabs": false,
+    "lineWidth": 100,
+    "indentWidth": 2,
+    "semiColons": true,
+    "singleQuote": false
+  },
+  "lint": {
+    "rules": {
+      "tags": ["recommended"]
+    }
+  }
+}
